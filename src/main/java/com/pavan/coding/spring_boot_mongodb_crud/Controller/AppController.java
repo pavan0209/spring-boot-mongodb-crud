@@ -20,7 +20,7 @@ public class AppController {
     @PostMapping("/add-student")
     public ResponseEntity<ApiResponse> addStudent(@RequestBody Student student) {
         Student savedStudent = studentRepository.save(student);
-        ApiResponse response = new ApiResponse(true, "Student added successfully.",savedStudent);
+        ApiResponse response = new ApiResponse(true, "Student added successfully.", savedStudent);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -28,6 +28,19 @@ public class AppController {
     public ResponseEntity<ApiResponse> getStudents() {
         List<Student> students = studentRepository.findAll();
         ApiResponse response = new ApiResponse(true, "Students fetched successfully.", students);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update-student/{id}")
+    public ResponseEntity<ApiResponse> updateStudent(@PathVariable String id, @RequestBody Student student) {
+        if (!studentRepository.existsById(id)) {
+            ApiResponse response = new ApiResponse(false, "Student with id " + id + " does not exist.", null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        student.setId(id);
+        Student updatedStudent = studentRepository.save(student);
+        ApiResponse response = new ApiResponse(true, "Student updated successfully.", updatedStudent);
         return ResponseEntity.ok(response);
     }
 }
