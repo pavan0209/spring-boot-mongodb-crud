@@ -43,4 +43,16 @@ public class AppController {
         ApiResponse response = new ApiResponse(true, "Student updated successfully.", updatedStudent);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/delete-student/{id}")
+    public ResponseEntity<ApiResponse> deleteStudent(@PathVariable String id) {
+        if (!studentRepository.existsById(id)) {
+            ApiResponse response = new ApiResponse(false, "Student with id " + id + " does not exist.", null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        studentRepository.deleteById(id);
+        ApiResponse response = new ApiResponse(true, "Student deleted successfully.", null);
+        return ResponseEntity.ok(response);
+    }
 }
