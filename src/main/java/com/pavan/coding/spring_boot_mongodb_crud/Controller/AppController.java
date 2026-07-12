@@ -18,4 +18,9 @@ public class AppController {
         Student saved = this.studentRepository.save(student);
         return ResponseEntity.ok(saved);
     }
+
+    @GetMapping("/get-students")
+    public ResponseEntity<?> getStudents() {
+        return ResponseEntity.ok(studentRepository.findAll());
+    }
 }
