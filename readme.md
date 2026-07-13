@@ -47,7 +47,7 @@ A Spring Boot REST API application that demonstrates **CRUD** (Create, Read, Upd
 <p align="center">
   <img src="mongodb_crud_flow.png" alt="Spring Boot MongoDB CRUD Flow" width="75%">
 </p>
-<br><br>
+<br>
 <p align="center">
   <img src="db_difference.png" alt="Spring Boot Flow Difference MySQL & MongoDB" width="75%">
 </p>
